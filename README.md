@@ -106,6 +106,62 @@ Neste exemplo:
 - 5432: substitua pela porta em que o PostgreSQL está sendo executado (o padrão é 5432).
 - dbname: substitua pelo nome do banco de dados PostgreSQL que você está usando.
 
+## HOSTS
+É necessário a configuração do `ALLOWED HOSTS` dentro do arquivo seetings.py. Se você ainda não sabe qual será os hosts e DNS utilizado deixe da seguinte forma.
+```
+ALLOWED_HOSTS = ['*']
+```
+Isso vai permitir acesso de qualquer endereço de internet.
+
+Caso você já tenha um DNS configurado poderá utilizar normalmente da seguinte maneira:
+```
+ALLOWED_HOSTS = ['seusite.com.br']
+```
+
+Ainda no Arquivo Settings.py
+
+Importar a bibliote OS
+```
+import os
+```
+Copie e cole o código abaixo para arquivos estáticos.
+```
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+```
+  
+## Instalar gunicorn
+```
+pip install gunicorn
+```
+Crie na raiz do projeto ao lado do manage.py 2 arquivos, são eles:
+
+```
+Procfile
+runtime.txt
+```
+### runtime
+Dentro do arquivo `runtime.txt` coloque a versão do python utilizada no desenvolvimento.
+```
+python-3.10.0
+```
+Se nao sabe qual a versão está utilizando use o comando `python --version`
+Atente-se ao uso de letras minúsculas.
+
+### Procfile
+Dentro do arquivo `Procfile` coloque o seguinte código.
+```
+web: gunicorn core.wsgi --log-file -
+```
+Lembrando que `core` deverá ser o nome do seu projeto.
+
+### Requerimentos básicos
+
+Vamos criar um arquivo contendo os requsitos funcionais para nosso sistema.
+```
+pip freeze > requirements.txt
+```
 
 ----- EM CONSTRUÇÃO -------
 ----- NÃO EXECUTE NADA DOS COMANDO ABAIXO ---------
@@ -115,8 +171,7 @@ Neste exemplo:
 * application = Cling(get_wsgi_application())
 * Also don't forget to check "DJANGO_SETTINGS_MODULE". It is prone to frequent mistakes.
 
-### Settings.py
-* STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 ## Create a requirements-dev.txt
 pip freeze > requirements-dev.txt
