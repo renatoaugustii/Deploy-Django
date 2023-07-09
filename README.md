@@ -1,6 +1,6 @@
 # Deploy django
 Configurações mínimas para hospedar um projeto em Django em serviços como Railway, Heroku e etc...
-Se você já tem o projeto desenvolvido e gostaria apenas de realizar o deploy, vá direto para o tópico de <a href="#Ocultando a configuração da instância">Ocultando a configuração da instância</a>
+Se você já tem o projeto desenvolvido e gostaria apenas de realizar o deploy, vá direto para o tópico de <a href="## Ocultando a configuração da instância">Ocultando a configuração da instância</a>
 
 ## Crie a pasta do projeto
 * mkdir directory_name
