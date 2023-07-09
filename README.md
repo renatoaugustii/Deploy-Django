@@ -4,26 +4,34 @@ Se você já tem o projeto desenvolvido e gostaria apenas de realizar o deploy, 
 
 ## Crie a pasta do projeto
 ```
-* mkdir directory_name
-* cd directory_name
+mkdir directory_name
+```
+```
+cd directory_name
 ```
 
-## Create and activate your virtuanenv
+## Criar e ativar o ambiente virtual
 ```
 python -m venv venv
+```
+```
 venv\Scripts\activate
 ```
 
-## Installing django
+## Instalar o Django
 ```
 * pip install django
 ```
-## Create the django project
-* django-admin startproject myproject
+## Criar um projeto Django
+```
+django-admin startproject core .
+```
 
-## Creating the Git repository
-* git init 
-* Create a file called `.gitignore` with the following content:
+## Criar o repositório git
+```
+git init
+```
+* Criar um arquivo chamado de `.gitignore` contendo o seguinte:
 ```
 # See the name for you IDE
 .idea
@@ -33,35 +41,74 @@ venv\Scripts\activate
 .vEnv
 *pyc
 ```
-* git add .
-* git commit -m 'First commit'
+Se você criar um repositório diretamente pelo github definindo python como linguagem de desenvolvimento esse arquivo gitignore já estará preenchido corretamente.
+```
+git add .
+```
+```
+git commit -m 'First commit'
+```
 
 ## Ocultando a configuração da instância
-* pip install python-decouple
-* create an .env file at the root path and insert the following variables
-- SECRET_KEY=Your$eCretKeyHere (Get this secrety key from the settings.py)
-- DEBUG=True
+É necessário a instalação do Python Decouple para que seja possível utilizar um arquivo de configurações, onde ficarão salvos os dados sensíveis da aplicação Django.
+```
+pip install python-decouple
+```
+
+Crie um arquivo .env na raíz do projeto ao lado do manage.py e insira as seguintes variáveis
+```
+SECRET_KEY=Your$eCretKeyHere (Você consegue o valor dessa chave no arquivo settings.py)
+DEBUG=True
+```
+A chave secreta(SECRET_KEY) não pode conter aspas simnples nem duplas, deve conter apenas os caracteres de composição da chave.
 
 ### Settings.py
+No arquivo Settings também é necessário modificações, inciando pela importação do config.
+
+```
 * from decouple import config
-* SECRET_KEY = config('SECRET_KEY')
-* DEBUG = config('DEBUG', default=False, cast=bool)
+```
 
-## Configuring the Data Base (You don't need that if you already had an database).
-* pip install dj-database-url
+Agora é necessário inserir o trecho a seguir exatamente como está abaixo. Isso irá garantir que seja possível utilizar as variáveis no ambiente de desenvolvimento e que essas informações não sejam vistas após o deploy.
+```
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+```
+
+## Configurando uma Base de Dados (Você não precisa disso se já tiver um banco de dados).
+```
+pip install dj-database-url
+```
 
 ### Settings.py
-* from dj_database_url import parse as dburl
 
+Necessário import do dj_database_url
+```
+from dj_database_url import parse as dburl
+```
+O código abaixo permite a utilização do sqlite3 quando estiver rodando localmente, e faz uso do banco de dados de produção quando estiver online.
+```
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
     'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
+```
+No arquivo `.env` adicione o seguinte comando:
+```
+DATABASE_URL=postgres://user:password@localhost:5432/dbname
+```
+Neste exemplo:
+
+- user: substitua pelo nome de usuário do PostgreSQL.
+- password: substitua pela senha do usuário do PostgreSQL.
+- localhost: substitua pelo endereço do servidor do PostgreSQL (pode ser um endereço IP ou nome de domínio).
+- 5432: substitua pela porta em que o PostgreSQL está sendo executado (o padrão é 5432).
+- dbname: substitua pelo nome do banco de dados PostgreSQL que você está usando.
 
 
-## Static files 
-pip install dj-static
+----- EM CONSTRUÇÃO -------
+----- NÃO EXECUTE NADA DOS COMANDO ABAIXO ---------
 
 ### wsgi 
 * from dj_static import Cling
