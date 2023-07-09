@@ -3,16 +3,21 @@ Configurações mínimas para hospedar um projeto em Django em serviços como Ra
 Se você já tem o projeto desenvolvido e gostaria apenas de realizar o deploy, vá direto para o tópico de <a href="## Ocultando a configuração da instância">Ocultando a configuração da instância</a>
 
 ## Crie a pasta do projeto
+```
 * mkdir directory_name
 * cd directory_name
+```
 
 ## Create and activate your virtuanenv
-* virtualenv -p python3 .vEnv
-* . .vEnv/bin/activate
+```
+python -m venv venv
+venv\Scripts\activate
+```
 
 ## Installing django
+```
 * pip install django
-
+```
 ## Create the django project
 * django-admin startproject myproject
 
