@@ -1,7 +1,8 @@
-# django-heroku
-Minimal configuration to host a Django project at Heroku
+# Deploy django
+Configurações mínimas para hospedar um projeto em Django em serviços como Railway, Heroku e etc...
+Se você já tem o projeto desenvolvido e gostaria apenas de realizar o deploy, vá direto para o tópico de <a href="#Ocultando a configuração da instância">Ocultando a configuração da instância</a>
 
-## Create the project directory
+## Crie a pasta do projeto
 * mkdir directory_name
 * cd directory_name
 
@@ -30,7 +31,7 @@ Minimal configuration to host a Django project at Heroku
 * git add .
 * git commit -m 'First commit'
 
-## Hidding instance configuration
+## Ocultando a configuração da instância
 * pip install python-decouple
 * create an .env file at the root path and insert the following variables
 - SECRET_KEY=Your$eCretKeyHere (Get this secrety key from the settings.py)
