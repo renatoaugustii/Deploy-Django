@@ -130,7 +130,12 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 ```
-  
+
+Para inserir os arquivos estáticos do admin Django necessários para o deploy utilize o comando:
+```
+python manage.py collectstatic
+```
+
 ## Instalar gunicorn
 ```
 pip install gunicorn
