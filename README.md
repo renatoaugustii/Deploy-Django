@@ -124,12 +124,34 @@ Importar a bibliote OS
 ```
 import os
 ```
+### SERVINDO ARQUIVOS ESTÁTICOS
 Copie e cole o código abaixo para arquivos estáticos.
 ```
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 ```
+
+Instalar o Whitenoise para servir os arquivos estáticos em produção.
+```
+pip install whitenoise
+```
+
+Adicionar o código abaixo na segunda linha do MIDDLEWARE
+```
+'whitenoise.middleware.WhiteNoiseMiddleware',
+```
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
 
 Para inserir os arquivos estáticos do admin Django necessários para o deploy utilize o comando:
 ```
@@ -146,10 +168,11 @@ Crie na raiz do projeto ao lado do manage.py 2 arquivos, são eles:
 Procfile
 runtime.txt
 ```
+
 ### runtime
 Dentro do arquivo `runtime.txt` coloque a versão do python utilizada no desenvolvimento.
 ```
-python-3.10.0
+python-3.11.4
 ```
 Se nao sabe qual a versão está utilizando use o comando `python --version`
 Atente-se ao uso de letras minúsculas.
@@ -160,6 +183,14 @@ Dentro do arquivo `Procfile` coloque o seguinte código.
 web: gunicorn core.wsgi --log-file -
 ```
 Lembrando que `core` deverá ser o nome do seu projeto.
+
+### BANCO DE DADOS POSTGRESQL
+
+Recomendo a utilização do banco de dados PostgreSQL caso seja uma necessidade de seu projeto. Para isso precisamos instalar uma biblioteca chamada de psycopg2.
+```
+pip instalar psycopg2
+```
+
 
 ### Requerimentos básicos
 
@@ -176,64 +207,3 @@ pip freeze > requirements.txt
 * application = Cling(get_wsgi_application())
 * Also don't forget to check "DJANGO_SETTINGS_MODULE". It is prone to frequent mistakes.
 
-
-
-## Create a requirements-dev.txt
-pip freeze > requirements-dev.txt
-
-## Create a file requirements.txt file and include reference to previows file and add two more requirements
-* -r requirements-dev.txt
-* gunicorn
-* psycopg2
-
-## Create a file Procfile and add the following code
-* web: gunicorn project.wsgi
-* You can check in django website or heroku website for more information:
-https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/gunicorn/
-https://devcenter.heroku.com/articles/django-app-configuration
-
-## Create a file runtime.txt and add the following core
-* python-3.6.0 (You can currently use "python-3.7.3")
-
-## Creating the app at Heroku
-You should install heroku CLI tools in your computer previously ( See http://bit.ly/2jCgJYW ) 
-* heroku apps:create app-name (you can create by heroku it's self if you wanted.)
-You can also login in heroku by: heroku login
-Remember to grab the address of the app in this point
-
-## Setting the allowed hosts
-* include your address at the ALLOWED_HOSTS directives in settings.py - Just the domain, make sure that you will take the protocol and slashes from the string
-
-## Heroku install config plugin
-* heroku plugins:install heroku-config
-
-### Sending configs from .env to Heroku ( You have to be inside tha folther where .env files is)
-* heroku plugins:install heroku-config
-* heroku config:push -a
-
-### To show heroku configs do
-* heroku config 
-(check this, if you fail changing by code, try changing by heroku dashboard)
-
-## Publishing the app
-* git add .
-* git commit -m 'Configuring the app'
-* git push heroku master --force (you don't need "--force")
-
-## Creating the data base (if you are using your own data base you don't need it, if was migrated there)
-* heroku run python3 manage.py migrate
-
-## Creating the Django admin user
-* heroku run python3 manage.py createsuperuser (the same as above)
-
-## EXTRAS
-### You may need to disable the collectstatic
-* heroku config:set DISABLE_COLLECTSTATIC=1
-
-### Also recommend set this configuration to your heroku settings
-* WEB_CONCURRENCY = 3
-
-### Changing a specific configuration
-* heroku config:set DEBUG=True
-Changing a specific configuration
-heroku config:set DEBUG=True
