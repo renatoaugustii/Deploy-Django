@@ -200,6 +200,11 @@ Recomendo a utilização do banco de dados PostgreSQL caso seja uma necessidade 
 pip instalar psycopg2
 ```
 
+### CHECK --DEPLOY
+Verificar requerimentos para DEPLOY
+```
+python manage.py check --deploy
+```
 
 ### Requerimentos básicos
 
