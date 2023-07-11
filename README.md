@@ -118,6 +118,15 @@ Caso você já tenha um DNS configurado poderá utilizar normalmente da seguinte
 ALLOWED_HOSTS = ['seusite.com.br']
 ```
 
+Incluir também as permissões para uso do CSRF
+```
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#CSRF_TRUSTED_ORIGINS = ['https://seu.site.com.br']
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
+```
+
+
 Ainda no Arquivo Settings.py
 
 Importar a bibliote OS
