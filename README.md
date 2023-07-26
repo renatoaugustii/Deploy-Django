@@ -150,11 +150,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 No arquivo `Settings.py`
 
-Importar a biblioteca `OS`
-```
-import os
-```
-
 Copie e cole o código abaixo para arquivos estáticos.
 ```
 STATIC_URL = 'staticfiles/'
@@ -200,6 +195,11 @@ MIDDLEWARE = [
 ### Criando a pasta do collectstatic
 
 Para inserir os arquivos estáticos do admin Django necessários para o deploy utilize o comando:
+
+Crie na raíz ao lado do manage.py uma pasta chamada `template` e dentro dela uma pasta chamada `static`.
+
+Ficando assim: `Template\static`
+
 ```
 python manage.py collectstatic
 ```
