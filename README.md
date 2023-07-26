@@ -45,7 +45,7 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
-Se ocorreu tudo bem você já será capaz de ver a página inicial do django.
+Se ocorreu tudo bem você já será capaz de ver a página inicial do django. Faça o teste também de entrar na página do `ADM`. Se ainda não criou lembre-se de criar o `SuperUser`.
 
 ## Ocultando a configuração da instância
 É necessário a instalação do Python Decouple para que seja possível utilizar um arquivo de configurações, onde ficarão salvos os dados sensíveis da aplicação Django.
