@@ -35,7 +35,13 @@ django-admin startproject core .
 
 ## Verificando se está tudo certo.
 
-Rodando a aplicação para verificar se ocorreu tudo bem com a instalação do Django.
+Rodando a aplicação para verificar se ocorreu tudo bem com a instalação do Django. Execute na sequencia os comandos.
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
 ```
 python manage.py runserver
 ```
