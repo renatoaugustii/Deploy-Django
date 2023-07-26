@@ -102,6 +102,7 @@ pip install dj-database-url
 Necessário import do dj_database_url
 ```
 from dj_database_url import parse as dburl
+import os
 ```
 O código abaixo permite a utilização do sqlite3 quando estiver rodando localmente, e faz uso do banco de dados de produção quando estiver online.
 ```
