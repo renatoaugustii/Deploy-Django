@@ -88,7 +88,7 @@ python manage.py runserver
 
 Recomendo a utilização do banco de dados PostgreSQL caso seja uma necessidade de seu projeto. Para isso precisamos instalar uma biblioteca chamada de psycopg2.
 ```
-pip instalar psycopg2
+pip install psycopg2
 ```
 
 ## Configurando uma Base de Dados (Você não precisa disso se já tiver um banco de dados).
